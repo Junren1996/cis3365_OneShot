@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controllor.NewAppoinmentControolor">
+   <children>
+      <AnchorPane prefHeight="425.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="231.0" layoutY="28.0" prefHeight="58.0" prefWidth="210.0" text="New Appoinment" />
+            <Label layoutX="148.0" layoutY="102.0" text="Client ID:" />
+            <Label layoutX="116.0" layoutY="154.0" text="Client Name:" />
+            <Label layoutX="179.0" layoutY="207.0" />
+            <Label layoutX="178.0" layoutY="270.0" text="Date" />
+            <Button layoutX="259.0" layoutY="339.0" mnemonicParsing="false" onAction="#back" text="Button" />
+            <RadioButton layoutX="259.0" layoutY="207.0" mnemonicParsing="false" text="Katy" />
+            <RadioButton layoutX="400.0" layoutY="207.0" mnemonicParsing="false" text="Houston" />
+            <TextField fx:id="ID" layoutX="261.0" layoutY="95.0" />
+            <TextField fx:id="Name" layoutX="261.0" layoutY="147.0" />
+            <DatePicker fx:id="Date" layoutX="261.0" layoutY="263.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

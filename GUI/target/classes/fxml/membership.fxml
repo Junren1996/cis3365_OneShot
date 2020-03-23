@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<BorderPane styleClass="green-theme" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controllor.MembershipControllor">
+    <top>
+        <AnchorPane prefHeight="80.0" styleClass="blue-theme" stylesheets="@new.css">
+           <children>
+               <Label styleClass="font-gray" stylesheets="@new.css" text="Sakura Nail Salon " AnchorPane.leftAnchor="10" AnchorPane.topAnchor="20">
+                   <effect>
+                       <Reflection bottomOpacity="0.2" fraction="0.5" topOffset="-5.0" />
+                   </effect>
+                   <font>
+                       <Font name="System Bold" size="26.0" />
+                   </font>
+               </Label>
+               <ImageView fitHeight="45" fitWidth="45" styleClass="default-theme" AnchorPane.rightAnchor="120" AnchorPane.topAnchor="15">
+                  <image>
+                      <Image url="@img/me.png" />
+                  </image>
+               </ImageView>
+               <Button styleClass="btn-radius-large,blue-theme" stylesheets="@new.css" text="Sign Out" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20" />
+           </children>
+        </AnchorPane>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.5">
+           <items>
+               <AnchorPane minWidth="200" prefHeight="632.0" prefWidth="294.0" styleClass="dark-gray-theme">
+                  <children>
+                      <Accordion AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <panes>
+                              <TitledPane alignment="TOP_LEFT" stylesheets="@new.css" text="Recent Appoinment">
+                                 <content>
+                                     <VBox minHeight="100" spacing="10" styleClass="dark-theme">
+                                        <children>
+                                            <Button styleClass="menu-btn" stylesheets="@new.css" text="Appoinment " />
+                                            <Button styleClass="menu-btn" text="Appoinment" />
+                                        </children>
+                                     </VBox>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane alignment="TOP_LEFT" stylesheets="@new.css" text="Walk-in service">
+                                 <content>
+                                     <VBox minHeight="100" spacing="10" styleClass="dark-theme">
+                                        <children>
+                                            <Button styleClass="menu-btn" text="Service" />
+                                            <Button styleClass="menu-btn" text="Service" />
+                                        </children>
+                                     </VBox>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane alignment="TOP_LEFT" stylesheets="@new.css" text="Client Information">
+                                 <content>
+                                     <VBox minHeight="130" spacing="10" styleClass="dark-theme">
+                                        <children>
+                                            <Button styleClass="menu-btn" text="Client" />
+                                            <Button styleClass="menu-btn" text="Membership" />
+                                            <Button styleClass="menu-btn" text="Other" />
+                                        </children>
+                                     </VBox>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane alignment="TOP_LEFT" stylesheets="@new.css" text="Inventory">
+                                 <content>
+                                     <VBox minHeight="130" spacing="10" styleClass="dark-theme">
+                                        <children>
+                                            <Button styleClass="menu-btn" text="Inventory" />
+                                            <Button styleClass="menu-btn" text="Inventory" />
+                                        </children>
+                                     </VBox>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane alignment="TOP_LEFT" stylesheets="@new.css" text="Employee">
+                                 <content>
+                                     <VBox minHeight="130" spacing="10" styleClass="dark-theme">
+                                        <children>
+                                            <Button styleClass="menu-btn" stylesheets="@new.css" text="Employee" />
+                                            <Button styleClass="menu-btn" text="Employee" />
+                                        </children>
+                                     </VBox>
+                                 </content>
+                              </TitledPane>
+                          </panes>
+                      </Accordion>
+                  </children>
+               </AnchorPane>
+   
+               <!--中间内容面板-->
+               <StackPane fx:id="mainContainer" minWidth="1060" prefHeight="514.0" prefWidth="1060.0" styleClass="default-theme" stylesheets="@new.css">
+                   <padding>
+                       <Insets bottom="5" left="30" right="10" top="10" />
+                   </padding>
+               <children>
+                  <AnchorPane prefHeight="574.0" prefWidth="1018.0" stylesheets="@new.css">
+                     <children>
+                        <TableView fx:id="customerTableView" layoutX="34.0" layoutY="25.0" onDragDetected="#movetoProduct" prefHeight="587.0" prefWidth="283.0">
+                           <columns>
+                              <TableColumn fx:id="col1" prefWidth="282.0" text="Client Name" />
+                           </columns>
+                        </TableView>
+                        <TableView fx:id="memberTableView" layoutX="468.0" layoutY="25.0" onDragDropped="#dragtoTarget" onDragOver="#dragOver" prefHeight="591.0" prefWidth="359.0">
+                          <columns>
+                            <TableColumn fx:id="col2" prefWidth="358.0" text="Membership" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="881.0" layoutY="514.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="111.0" text="Done" />
+                     </children>
+                  </AnchorPane>
+               </children>
+               </StackPane>
+           </items>
+            <padding>
+                <Insets top="10" />
+            </padding>
+        </SplitPane>
+    </center>
+</BorderPane>
