@@ -10,7 +10,7 @@ public class employee {
     private String Phone;
     private String address;
     private String email;
-    private String hours;
+    private String Date;
     private String City;
 
 
@@ -77,11 +77,11 @@ public class employee {
     }
 
     public String getHours() {
-        return hours;
+        return Date;
     }
 
     public void setHours( String hours) {
-        this.hours = hours;
+        this.Date = hours;
     }
 
     public employee(String first, String last, String mail, String phonenumber, String address1, String h, String SSN) {
@@ -90,7 +90,7 @@ public class employee {
         this.Phone = phonenumber;
         this.address = address1;
         this.email = mail;
-        this.hours = h;
+        this.Date = h;
         this.SSN = SSN;
     }
 
