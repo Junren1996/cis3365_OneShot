@@ -3,6 +3,7 @@ package GUI.controllor;
 import GUI.Class.customer;
 import GUI.Class.employee;
 import GUI.DBconnection;
+import GUI.validation.FieldValidation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,11 +33,10 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 public class employeeControllor implements Initializable{
 
-
     private StackPane mainContainer;
-        //tableview elements
         @FXML
         public TableView<employee> tableview;
         @FXML
@@ -44,9 +44,9 @@ public class employeeControllor implements Initializable{
         @FXML
         private TableColumn<?,?> col2;
     @FXML
-    private TableColumn<?,?> col3;
+        private TableColumn<?,?> col3;
     @FXML
-    private TableColumn<?,?> col4;
+        private TableColumn<?,?> col4;
     @FXML
     private TableColumn<?,?> col5;
     @FXML
@@ -64,19 +64,32 @@ public class employeeControllor implements Initializable{
         @FXML
         private TextField address;
     @FXML
-    private TextField Hours;
+    private TextField dates;
     @FXML
     private TextField SSN;
     private Connection con = null;
     private PreparedStatement pst = null;
     private ResultSet rs= null;
     private ObservableList<employee> data;
+    @FXML
+    private Label error_fname;
+    @FXML
+    private Label error_lname;
+    @FXML
+    private Label error_phone;
+    @FXML
+    private Label error_address;
+    @FXML
+    private Label error_SSN;
+
+
 
         public void initialize(URL url, ResourceBundle rb) {
             firstfunction();
             con=GUI.DBconnection.dConnection();
             data = FXCollections.observableArrayList();
             loaddata();
+            setCellValueWhileClieckTable();
         }
 
         public void firstfunction(){
@@ -91,23 +104,17 @@ public class employeeControllor implements Initializable{
             //   tableview.setItems(originalPatient());
             // updata tableview
             tableview.setEditable(true);
-            /*col1.setCellFactory(TextFieldTableCell.forTableColumn());
-            col2.setCellFactory(TextFieldTableCell.forTableColumn());
-            col3.setCellFactory(TextFieldTableCell.forTableColumn());
-            col4.setCellFactory(TextFieldTableCell.forTableColumn());
-            col5.setCellFactory(TextFieldTableCell.forTableColumn());
-            col6.setCellFactory(TextFieldTableCell.forTableColumn());
-            col7.setCellFactory(TextFieldTableCell.forTableColumn());*/
-            // select mutiple rows once
+
             tableview.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         }
+
         public void loaddata(){
             data.clear();
             try {
                 pst = con.prepareStatement("SELECT * FROM dbo.Employee");
                 rs = pst.executeQuery();
                 while(rs.next()){
-                    data.add(new employee(rs.getString(3),rs.getString(2),"test@sakurasalon.com",rs.getString(6),rs.getString(7),"hours",rs.getString(5)));
+                    data.add(new employee(rs.getString(3),rs.getString(2),"test@sakurasalon.com",rs.getString(6),rs.getString(7),rs.getString(4),rs.getString(5)));
 
                 }
 
@@ -117,37 +124,69 @@ public class employeeControllor implements Initializable{
             tableview.setItems(data);
 
         }
-        public void changefirstname(TableColumn.CellEditEvent editt) {
-            employee selectPatient = tableview.getSelectionModel().getSelectedItem();
-            selectPatient.setFirstname(editt.getNewValue().toString());
+
+
+
+        public void NewButten( ) {
+            boolean filedoneEmpty = FieldValidation.isFieldNotEmpty(fName, error_fname,"Required");
+            boolean filedtwoEmpty = FieldValidation.isFieldNotEmpty(lName, error_lname,"Required");
+            boolean filedthreeEmpty = FieldValidation.isFieldNotEmpty(PhoneNumber, error_phone,"Required");
+            boolean filedfourEmpty = FieldValidation.isFieldNotEmpty(SSN, error_address,"Required");
+            boolean filedfiveEmpty = FieldValidation.isFieldNotEmpty(SSN, error_SSN,"Required");
+
+
+            if(filedfiveEmpty && filedfourEmpty && filedthreeEmpty && filedtwoEmpty && filedoneEmpty) {
+
+                String sql = "Insert into dbo.Employee(Emp_Lastname,Emp_Firstname,Emp_HireDate,Emp_SSN,Emp_Phone,Emp_Street) Values(?,?,?,?,?,?)";
+                String fname = fName.getText();
+                String lname = lName.getText();
+                String phonen = PhoneNumber.getText();
+                String ssn = SSN.getText();
+                String street = address.getText();
+                String date = dates.getText();
+
+
+                try {
+                    pst = con.prepareStatement(sql);
+                    pst.setString(1, lname);
+                    pst.setString(2, fname);
+                    pst.setString(3,date);
+                    pst.setString(4, ssn);
+                    pst.setString(5, phonen);
+                    pst.setString(6, street);
+                    int i = pst.executeUpdate();
+                    if (i == 1) {
+                        System.out.print("Successful");
+                        loaddata();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+            }
         }
 
-        public void changelastname(TableColumn.CellEditEvent editt) {
-            employee selectPatient = tableview.getSelectionModel().getSelectedItem();
-            selectPatient.setLastname(editt.getNewValue().toString());
+        private void clearfield(){
+            fName.clear();
+            lName.clear();
+            address.clear();
+            SSN.clear();
+            PhoneNumber.clear();
+            email.clear();
+            data.clear();
         }
 
-
-        public void NewButten() {
-            String sql = "Insert into dbo.Employee(Emp_Lastname,Emp_Firstname,Emp_HireDate,Emp_SSN,Emp_Phone,Emp_Street) Values(?,?,'2008-12-01',?,?,?)";
-            String fname = fName.getText();
-            String lname = lName.getText();
-            String phonen= PhoneNumber.getText();
-              String ssn = SSN.getText();
-            String street = address.getText();
-
+        public void deleteButton() {
+           String sql = "delete from dbo.Employee where Emp_SSN = ?";
 
             try {
                 pst = con.prepareStatement(sql);
-                pst.setString(1,lname);
-                pst.setString(2,fname);
-                pst.setString(3,ssn);
-                pst.setString(4,phonen);
-                pst.setString(5,street);
+                pst.setString(1,SSN.getText());
                 int i = pst.executeUpdate();
                 if(i==1){
-                    System.out.print("Successful");
                     loaddata();
+                    clearfield();
+
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -156,28 +195,54 @@ public class employeeControllor implements Initializable{
 
         }
 
-        public void deleteButton() {
-            ObservableList<employee> selectRow;
-            //select items
-            selectRow = tableview.getSelectionModel().getSelectedItems();
 
-            for (employee employees : selectRow) {
-                tableview.getItems().remove(employees);
+
+        private void setCellValueWhileClieckTable(){
+            tableview.setOnMouseClicked(e -> {
+                employee em = tableview.getItems().get(tableview.getSelectionModel().getSelectedIndex());
+                fName.setText(em.getFirstname());
+                lName.setText(em.getLastname());
+                PhoneNumber.setText(em.getPhone());
+                dates.setText(em.getHours());
+                SSN.setText(em.getSSN());
+                address.setText(em.getAddress());
+                email.setText(em.getEmail());
+            });
+
+        }
+
+        public void updateData(){
+            String sql = "Update dbo.Employee set Emp_Lastname = ?,Emp_Firstname = ?,Emp_HireDate = ?,Emp_Phone = ?,Emp_Street= ? where Emp_SSN = ?";
+            try {
+                pst = con.prepareStatement(sql);
+                String fname = fName.getText();
+                String lname = lName.getText();
+                String phonen = PhoneNumber.getText();
+                String ssn = SSN.getText();
+                String street = address.getText();
+                String date = dates.getText();
+
+                pst.setString(1, lname);
+                pst.setString(2, fname);
+                pst.setString(3,date);
+                pst.setString(4, phonen);
+                pst.setString(5, street);
+                pst.setString(6, ssn);
+
+                int i = pst.executeUpdate();
+                if(i==1){
+                    loaddata();
+
+                }
+            } catch (SQLException e) {
+                Logger.getLogger(DBconnection.class.getName()).log(Level.SEVERE, null, e);
             }
+
+
         }
 
 
-        //return value to tableview
-        public ObservableList<employee> originalPatient() {
-            String str = "2015-03-15";
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-            ObservableList<employee> person = FXCollections.observableArrayList();
-            person.add(new employee());
-
-            return person;
-
-        }
 
     public void appoinment() throws Exception {
         switchView("appoinment.fxml");
