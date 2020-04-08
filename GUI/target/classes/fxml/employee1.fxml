@@ -109,20 +109,26 @@
                               <TableColumn fx:id="col3" prefWidth="131.0" text="Phone" />
                               <TableColumn fx:id="col4" prefWidth="127.0" text="Address" />
                               <TableColumn fx:id="col5" prefWidth="137.0" text="Email" />
-                              <TableColumn fx:id="col7" prefWidth="110.0" text="Hours" />
+                              <TableColumn fx:id="col7" prefWidth="110.0" text="Hire Date" />
                               <TableColumn fx:id="col6" prefWidth="93.0" text="SSN" />
                           </columns>
                         </TableView>
-                        <Button layoutX="870.0" layoutY="530.0" mnemonicParsing="false" onAction="#NewButten" styleClass="green-theme" stylesheets="@new.css" text="Add New" />
+                        <Button layoutX="869.0" layoutY="559.0" mnemonicParsing="false" onAction="#NewButten" styleClass="green-theme" stylesheets="@new.css" text="Add New" />
                         <Button layoutY="14.0" mnemonicParsing="false" onAction="#deleteButton" styleClass="warning-theme" stylesheets="@new.css" text="Delete" />
-                        <TextField fx:id="fName" layoutX="824.0" layoutY="86.0" prefHeight="42.0" prefWidth="180.0" promptText="First Name" />
-                        <TextField fx:id="lName" layoutX="824.0" layoutY="151.0" prefHeight="42.0" prefWidth="180.0" promptText="Last Name" />
-                        <TextField fx:id="PhoneNumber" layoutX="824.0" layoutY="211.0" prefHeight="42.0" prefWidth="180.0" promptText="Phone" />
+                        <TextField fx:id="fName" layoutX="825.0" layoutY="68.0" prefHeight="42.0" prefWidth="180.0" promptText="First Name" />
+                        <TextField fx:id="lName" layoutX="825.0" layoutY="142.0" prefHeight="42.0" prefWidth="180.0" promptText="Last Name" />
+                        <TextField fx:id="PhoneNumber" layoutX="825.0" layoutY="208.0" prefHeight="42.0" prefWidth="180.0" promptText="Phone" />
                         <TextField fx:id="email" layoutX="824.0" layoutY="275.0" prefHeight="42.0" prefWidth="180.0" promptText="Email" />
-                        <TextField fx:id="Hours" layoutX="824.0" layoutY="342.0" prefHeight="42.0" prefWidth="180.0" promptText="Hours" />
-                        <TextField fx:id="SSN" layoutX="824.0" layoutY="406.0" prefHeight="42.0" prefWidth="180.0" promptText="SSN" />
-                        <Text layoutX="848.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Employee.." />
-                        <TextField fx:id="address" layoutX="825.0" layoutY="471.0" prefHeight="42.0" prefWidth="180.0" promptText="Address" />
+                        <TextField fx:id="dates" layoutX="824.0" layoutY="342.0" prefHeight="42.0" prefWidth="180.0" promptText="yyyy-mm-dd" />
+                        <TextField fx:id="SSN" layoutX="824.0" layoutY="412.0" prefHeight="42.0" prefWidth="180.0" promptText="SSN" />
+                        <Text layoutX="840.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Employee.." />
+                        <TextField fx:id="address" layoutX="824.0" layoutY="481.0" prefHeight="42.0" prefWidth="180.0" promptText="Address" />
+                        <Label fx:id="error_fname" layoutX="840.0" layoutY="110.0" />
+                        <Label fx:id="error_lname" layoutX="840.0" layoutY="184.0" />
+                        <Label fx:id="error_phone" layoutX="840.0" layoutY="250.0" />
+                        <Label fx:id="error_SSN" layoutX="840.0" layoutY="454.0" />
+                        <Label fx:id="error_address" layoutX="840.0" layoutY="523.0" />
+                        <Button layoutX="113.0" layoutY="14.0" mnemonicParsing="false" onAction="#updateData" styleClass="green-theme" stylesheets="@new.css" text="Update" />
                      </children>
                   </AnchorPane>
                </children>

@@ -106,13 +106,13 @@
                         <Button layoutX="152.0" layoutY="14.0" mnemonicParsing="false" onAction="#newbutt" styleClass="blue-theme" stylesheets="@new.css" text="Button" />
                         <Button layoutX="290.0" layoutY="80.0" mnemonicParsing="false" styleClass="green-theme" stylesheets="@new.css" text="Button" />
                         <TextField layoutX="34.0" layoutY="80.0" />
-                        <TableView fx:id="tableview" layoutX="34.0" layoutY="152.0" prefHeight="460.0" prefWidth="761.0">
+                        <TableView fx:id="tableview" layoutX="34.0" layoutY="152.0" prefHeight="460.0" prefWidth="760.0">
                           <columns>
-                            <TableColumn fx:id="col1" prefWidth="105.0" text="C1" />
-                            <TableColumn fx:id="col2" prefWidth="137.0" text="C2" />
-                              <TableColumn fx:id="col3" prefWidth="133.0" text="Column X" />
-                              <TableColumn fx:id="col4" prefWidth="127.0" text="Column X" />
-                              <TableColumn fx:id="col5" prefWidth="153.0" text="Column X" />
+                            <TableColumn fx:id="col1" prefWidth="180.0" text="Last Name" />
+                              <TableColumn fx:id="col2" prefWidth="180.0" text="First Name" />
+                              <TableColumn fx:id="col3" prefWidth="190.0" text="Email" />
+
+                              <TableColumn fx:id="col5" prefWidth="210.0" text="Phone" />
                           </columns>
                         </TableView>
                         <Button layoutX="879.0" layoutY="418.0" mnemonicParsing="false" onAction="#newbutt" styleClass="green-theme" stylesheets="@new.css" text="Button" />

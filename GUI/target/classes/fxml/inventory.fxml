@@ -104,10 +104,9 @@
                      <children>
                         <TableView fx:id="tableview" layoutX="20.0" layoutY="20.0" prefHeight="592.0" prefWidth="661.0">
                           <columns>
-                            <TableColumn fx:id="col2" prefWidth="137.0" text="Name" />
-                              <TableColumn fx:id="col3" prefWidth="223.0" text="Amount" />
-                              <TableColumn fx:id="col4" prefWidth="185.0" text="Detail" />
-                              <TableColumn fx:id="col1" prefWidth="115.0" text="ID" />
+                            <TableColumn fx:id="col2" prefWidth="223.0" text="Name" />
+                              <TableColumn fx:id="col3" prefWidth="137.0" text="Amount" />
+                              <TableColumn fx:id="col4" prefWidth="300.0" text="Detail" />
                           </columns>
                         </TableView>
                         <Button layoutX="879.0" layoutY="463.0" mnemonicParsing="false" onAction="#NewButten" styleClass="green-theme" stylesheets="@new.css" text="Add" />
