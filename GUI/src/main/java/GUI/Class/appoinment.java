@@ -1,34 +1,19 @@
 package GUI.Class;
 
 public class appoinment {
-    private int customerNumber;
-    private int locationNumber;
-    private int EmployeeNumber;
+    private String appnumber;
+    private String name;
+    private String service;
+    private String time;
     private String Date;
-    private double total;
 
-    public int getCustomerNumber() {
-        return customerNumber;
-    }
 
-    public void setCustomerNumber(int customerNumber) {
-        this.customerNumber = customerNumber;
-    }
-
-    public int getLocationNumber() {
-        return locationNumber;
-    }
-
-    public void setLocationNumber(int locationNumber) {
-        this.locationNumber = locationNumber;
-    }
-
-    public int getEmployeeNumber() {
-        return EmployeeNumber;
-    }
-
-    public void setEmployeeNumber(int employeeNumber) {
-        EmployeeNumber = employeeNumber;
+    public appoinment(String appnumber, String cn,String service,String time,String date){
+        this.appnumber = appnumber;
+        this.name = cn;
+        this.service = service;
+        this.time = time;
+        this.Date =date;
     }
 
     public String getDate() {
@@ -39,11 +24,36 @@ public class appoinment {
         Date = date;
     }
 
-    public double getTotal() {
-        return total;
+
+    public String getAppnumber() {
+        return appnumber;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setAppnumber(String appnumber) {
+        this.appnumber = appnumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getService() {
+        return service;
+    }
+
+    public void setService(String service) {
+        this.service = service;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }
