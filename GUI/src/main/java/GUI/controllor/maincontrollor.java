@@ -39,9 +39,6 @@ public class maincontrollor implements Initializable{
 
 
 
-
-
-
     private StackPane mainContainer;
         //tableview elements
         @FXML
@@ -167,8 +164,21 @@ public class maincontrollor implements Initializable{
 
 
 
-    public void appoinment() throws Exception {
-        switchView("appoinment.fxml");
+    public void appoinment(ActionEvent event) throws Exception {
+        Parent NewScene = FXMLLoader.load(getClass().getResource("/fxml/appoinment.fxml"));
+        Scene NewPatient = new Scene(NewScene);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        //window.getStylesheets().add(style.css);
+        window.setScene(NewPatient);
+        window.show();
+    }
+    public void appoinment2(ActionEvent event) throws Exception {
+        Parent NewScene = FXMLLoader.load(getClass().getResource("/fxml/appointmentquery.fxml"));
+        Scene NewPatient = new Scene(NewScene);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        //window.getStylesheets().add(style.css);
+        window.setScene(NewPatient);
+        window.show();
     }
     public void client(ActionEvent event) throws Exception {
         Parent NewScene = FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));

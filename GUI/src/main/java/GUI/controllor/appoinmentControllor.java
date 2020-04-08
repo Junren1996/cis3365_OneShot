@@ -2,11 +2,14 @@ package GUI.controllor;
 
 import GUI.Class.appoinment;
 import GUI.Class.customer;
+import GUI.Class.employee;
+import GUI.DBconnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,73 +25,107 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class appoinmentControllor {
+public class appoinmentControllor  implements Initializable{
 
     private StackPane mainContainer;
     //tableview elements
     @FXML
-    public TableView<appoinment> tableview;
+    public TableView<appoinment> Appoinmenttableview;
     @FXML
-    private TableColumn<appoinment, String> col1;
+    private TableColumn<?,?> col1;
     @FXML
-    private TableColumn<appoinment, String> col2;
+    private TableColumn<?,?> col2;
     @FXML
-    private TableColumn<appoinment, String> col3;
+    private TableColumn<?,?> col3;
     @FXML
-    private TableColumn<appoinment, String> col4;
+    private TableColumn<?,?> col4;
     @FXML
-    private TableColumn<appoinment, String> col5;
+    private TableColumn<?,?> col5;
+
+    private Connection con = null;
+    private PreparedStatement pst = null;
+    private ResultSet rs= null;
+    private ObservableList<appoinment> data;
+
 
 
     public void initialize(URL url, ResourceBundle rb) {
+        firstfunction();
+        con=GUI.DBconnection.dConnection();
+        data = FXCollections.observableArrayList();
+        loaddata();
+
+
+    }
+    public void loaddata(){
+        data.clear();
+
+        try {
+            pst = con.prepareStatement("SELECT \n" +
+                    "A.Appt_Num AS 'Appoinment',\n" +
+                    "CONCAT(Customer.Cust_FirstName, ' ', Customer.Cust_LastName) AS Customer,\n" +
+                    "Service.Svc_Desc AS Service,\n" +
+                    "/*CONCAT(E.Emp_Firstname, ' ', E.Emp_Lastname) AS Employee,\n" +
+                    "Location.Loc_Street AS Location,*/\n" +
+                    "CONVERT(VARCHAR, Time_Slot.Slot_Start, 100) AS 'Time',\n" +
+                    "FORMAT(A.Appt_Date, 'MM/dd/yyyy') AS 'Date'\n" +
+                    "\n" +
+                    "\n" +
+                    "FROM Customer\n" +
+                    " JOIN Appointment A ON A.Cust_Num = Customer.Cust_Num\n" +
+                    "LEFT JOIN Location ON Location.Loc_Num = A.Loc_Num\n" +
+                    "LEFT JOIN Employee E ON E.Emp_Num = A.Emp_Num\n" +
+                    "LEFT JOIN Appt_Svc S ON A.Appt_Num = S.Appt_Num\n" +
+                    "LEFT JOIN Service ON S.Svc_Num = Service.Svc_Num\n" +
+                    "LEFT JOIN Appt_Time T ON A.Appt_Num = T.Appt_Num\n" +
+                    "LEFT JOIN Time_Slot ON T.Slot_Num = Time_Slot.Slot_Num\n" +
+                    "\n" +
+                    "Order by A.Appt_Date, T.Slot_Num;");
+
+            rs = pst.executeQuery();
+
+            while(rs.next()){
+
+                data.add(new appoinment("" + rs.getString(1), rs.getString(2), "" + rs.getString(3), rs.getString(4),rs.getString(5)));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBconnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Appoinmenttableview.setItems(data);
+
+
+    }
+
+    public void firstfunction(){
         //set up tableview
-        col1.setCellValueFactory(new PropertyValueFactory<appoinment, String>("firstname"));
-        col2.setCellValueFactory(new PropertyValueFactory<appoinment, String>("lastname"));
-        col3.setCellValueFactory(new PropertyValueFactory<appoinment, String>("Phone"));
-        col4.setCellValueFactory(new PropertyValueFactory<appoinment, String>("address"));
-        col5.setCellValueFactory(new PropertyValueFactory<appoinment, String>("email"));
-      //  tableview.setItems(originalPatient());
-        // updata tableview
-    //    tableview.setEditable(true);
-        col1.setCellFactory(TextFieldTableCell.forTableColumn());
-        col2.setCellFactory(TextFieldTableCell.forTableColumn());
-        col3.setCellFactory(TextFieldTableCell.forTableColumn());
-        col4.setCellFactory(TextFieldTableCell.forTableColumn());
-        col5.setCellFactory(TextFieldTableCell.forTableColumn());
-        // select mutiple rows once
-        tableview.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        col1.setCellValueFactory(new PropertyValueFactory<>("appnumber"));
+        col2.setCellValueFactory(new PropertyValueFactory<>("name"));
+        col3.setCellValueFactory(new PropertyValueFactory<>("service"));
+        col4.setCellValueFactory(new PropertyValueFactory<>("time"));
+        col5.setCellValueFactory(new PropertyValueFactory<>("Date"));
 
     }
 
-    /*public void changefirstname(TableColumn.CellEditEvent editt) {
-        appoinment selectPatient = tableview.getSelectionModel().getSelectedItem();
-        selectPatient.setFirstname(editt.getNewValue().toString());
-    }
 
-    public void changelastname(TableColumn.CellEditEvent editt) {
-        customer selectPatient = tableview.getSelectionModel().getSelectedItem();
-        selectPatient.setLastname(editt.getNewValue().toString());
-    }*/
-
-
-       /* public void NewPatientButten(ActionEvent event) {
-
-            customer newpatient = new customer(fName.getText(), lName.getText(), email.getText(), PhoneNumber.getText(), address.getText());
-            tableview.getItems().addAll(newpatient);
-
-        }*/
 
     public void deleteButton() {
         ObservableList<appoinment> selectRow;
         //select items
-        selectRow = tableview.getSelectionModel().getSelectedItems();
+        selectRow = Appoinmenttableview.getSelectionModel().getSelectedItems();
 
         for (appoinment appoinment : selectRow) {
-            tableview.getItems().remove(appoinment);
+            Appoinmenttableview.getItems().remove(appoinment);
         }
     }
 
