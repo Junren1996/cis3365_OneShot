@@ -10,9 +10,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 
-<BorderPane styleClass="green-theme" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controllor.appoinmentControllor">
+<BorderPane prefHeight="870.0" prefWidth="1364.0" styleClass="green-theme" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controllor.appoinmentControllor">
     <top>
-        <AnchorPane prefHeight="79.0" prefWidth="1278.0" styleClass="blue-theme" stylesheets="@new.css">
+        <AnchorPane prefHeight="120.0" prefWidth="1278.0" styleClass="blue-theme" stylesheets="@new.css">
            <children>
                <Label styleClass="font-gray" stylesheets="@new.css" text="Sakura Nail Salon " AnchorPane.leftAnchor="10" AnchorPane.topAnchor="20">
                    <effect>
@@ -106,13 +106,13 @@
                         <Button layoutX="152.0" layoutY="14.0" mnemonicParsing="false" styleClass="blue-theme" stylesheets="@new.css" text="Button" />
                         <Button layoutX="290.0" layoutY="80.0" mnemonicParsing="false" styleClass="green-theme" stylesheets="@new.css" text="Button" />
                         <TextField layoutX="34.0" layoutY="80.0" />
-                        <TableView fx:id="tableview" layoutX="34.0" layoutY="152.0" prefHeight="460.0" prefWidth="658.0">
+                        <TableView fx:id="Appoinmenttableview" layoutX="20.0" layoutY="152.0" prefHeight="618.0" prefWidth="751.0">
                           <columns>
-                            <TableColumn fx:id="col1" prefWidth="105.0" text="FirstName" />
-                            <TableColumn fx:id="col2" prefWidth="137.0" text="LastName" />
-                              <TableColumn fx:id="col3" prefWidth="133.0" text="Phone" />
-                              <TableColumn fx:id="col4" prefWidth="127.0" text="Address" />
-                              <TableColumn fx:id="col5" prefWidth="153.0" text="Email" />
+                            <TableColumn fx:id="col1" prefWidth="137.0" text="Appoinment#" />
+                              <TableColumn fx:id="col2" prefWidth="209.0" text="Name" />
+                              <TableColumn fx:id="col3" prefWidth="153.0" text="Service" />
+                              <TableColumn fx:id="col4" prefWidth="106.0" text="Time" />
+                              <TableColumn fx:id="col5" prefWidth="145.0" text="Date" />
                           </columns>
                         </TableView>
                         <Button layoutX="783.0" layoutY="447.0" mnemonicParsing="false" onAction="#newappoinmentbutt" styleClass="green-theme" stylesheets="@new.css" text="New Appounment.." />

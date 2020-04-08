@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<BorderPane styleClass="green-theme" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controllor.appointmentQueryControllor">
+    <top>
+        <AnchorPane prefHeight="80.0" styleClass="blue-theme" stylesheets="@new.css">
+            <children>
+                <Label styleClass="font-gray" stylesheets="@new.css" text="Sakura Nail Salon " AnchorPane.leftAnchor="10" AnchorPane.topAnchor="20">
+                    <effect>
+                        <Reflection bottomOpacity="0.2" fraction="0.5" topOffset="-5.0" />
+                    </effect>
+                    <font>
+                        <Font name="System Bold" size="26.0" />
+                    </font>
+                </Label>
+                <ImageView fitHeight="45" fitWidth="45" styleClass="default-theme" AnchorPane.rightAnchor="120" AnchorPane.topAnchor="15">
+                    <image>
+                        <Image url="@img/me.png" />
+                  </image>
+               </ImageView>
+               <Button styleClass="btn-radius-large,blue-theme" stylesheets="@../../java/GUI/controllor/new.css" text="Sign Out" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20" />
+           </children>
+        </AnchorPane>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.5">
+           <items>
+               <AnchorPane minWidth="200" prefHeight="632.0" prefWidth="294.0" styleClass="dark-gray-theme">
+                  <children>
+                      <Accordion AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <panes>
+                              <TitledPane alignment="TOP_LEFT" stylesheets="@../../java/GUI/controllor/new.css" text="Recent Appoinment">
+                                 <content>
+                                     <VBox minHeight="100" spacing="10" styleClass="dark-theme">
+                                        <children>
+                                            <Button styleClass="menu-btn" stylesheets="@../../java/GUI/controllor/new.css" text="Appoinment " />
+                                            <Button styleClass="menu-btn" text="Appoinment" />
+                                        </children>
+                                     </VBox>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane alignment="TOP_LEFT" stylesheets="@../../java/GUI/controllor/new.css" text="Walk-in service">
+                                 <content>
+                                     <VBox minHeight="100" spacing="10" styleClass="dark-theme">
+                                        <children>
+                                            <Button styleClass="menu-btn" text="Service" />
+                                            <Button styleClass="menu-btn" text="Service" />
+                                        </children>
+                                     </VBox>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane alignment="TOP_LEFT" stylesheets="@../../java/GUI/controllor/new.css" text="Client Information">
+                                 <content>
+                                     <VBox minHeight="130" spacing="10" styleClass="dark-theme">
+                                        <children>
+                                            <Button styleClass="menu-btn" text="Client" />
+                                            <Button styleClass="menu-btn" text="Membership" />
+                                            <Button styleClass="menu-btn" text="Other" />
+                                        </children>
+                                     </VBox>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane alignment="TOP_LEFT" stylesheets="@../../java/GUI/controllor/new.css" text="Inventory">
+                                 <content>
+                                     <VBox minHeight="130" spacing="10" styleClass="dark-theme">
+                                        <children>
+                                            <Button styleClass="menu-btn" text="Inventory" />
+                                            <Button styleClass="menu-btn" text="Inventory" />
+                                        </children>
+                                     </VBox>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane alignment="TOP_LEFT" stylesheets="@../../java/GUI/controllor/new.css" text="Employee">
+                                 <content>
+                                     <VBox minHeight="130" spacing="10" styleClass="dark-theme">
+                                        <children>
+                                            <Button styleClass="menu-btn" stylesheets="@../../java/GUI/controllor/new.css" text="Employee" />
+                                            <Button styleClass="menu-btn" text="Employee" />
+                                        </children>
+                                     </VBox>
+                                 </content>
+                              </TitledPane>
+                          </panes>
+                      </Accordion>
+                  </children>
+               </AnchorPane>
+   
+               <!--中间内容面板-->
+               <StackPane fx:id="mainContainer" minWidth="1060" prefHeight="514.0" prefWidth="1060.0" styleClass="default-theme" stylesheets="@../../java/GUI/controllor/new.css">
+                   <padding>
+                       <Insets bottom="5" left="30" right="10" top="10" />
+                   </padding>
+               <children>
+                  <AnchorPane prefHeight="866.0" prefWidth="986.0" stylesheets="@../../java/GUI/controllor/new.css">
+                     <children>
+                        <Label layoutX="53.0" layoutY="25.0" prefHeight="47.0" prefWidth="236.0" text="The Busiest Week">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="BusyWeektableview" layoutX="53.0" layoutY="84.0" prefHeight="129.0" prefWidth="331.0">
+                          <columns>
+                            <TableColumn fx:id="col1" prefWidth="134.0" text="Week Ending" />
+                            <TableColumn fx:id="col2" prefWidth="196.0" text="Total Bookings" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="53.0" layoutY="243.0" prefHeight="57.0" prefWidth="577.0" text="Which location have many appointments in a month?">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="manyapptableview" layoutX="53.0" layoutY="312.0" prefHeight="200.0" prefWidth="569.0">
+                          <columns>
+                            <TableColumn fx:id="col3" prefWidth="114.0" text="Month" />
+                            <TableColumn fx:id="col4" prefWidth="216.0" text="Location" />
+                              <TableColumn fx:id="col5" prefWidth="238.0" text="Appoinment Counts" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="53.0" layoutY="539.0" prefHeight="60.0" prefWidth="412.0" text="Find the number of guests on this day">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="search" layoutX="465.0" layoutY="548.0" prefHeight="42.0" prefWidth="192.0" />
+                        <Button layoutX="679.0" layoutY="548.0" mnemonicParsing="false" onAction="#loadDATA3" text="Go" />
+                        <TableView fx:id="guestdayableview" layoutX="53.0" layoutY="606.0" prefHeight="180.0" prefWidth="505.0">
+                          <columns>
+                            <TableColumn fx:id="col6" prefWidth="191.0" text="Appointment Date" />
+                            <TableColumn fx:id="col7" prefWidth="149.0" text="Day" />
+                              <TableColumn fx:id="col8" prefWidth="164.0" text="Total Booksing" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </children>
+               </StackPane>
+           </items>
+            <padding>
+                <Insets top="10" />
+            </padding>
+        </SplitPane>
+    </center>
+</BorderPane>
