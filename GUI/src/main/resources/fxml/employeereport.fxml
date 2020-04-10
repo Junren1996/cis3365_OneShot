@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<BorderPane prefHeight="912.0" prefWidth="1703.0" styleClass="green-theme" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controllor.EmployeeQueryController">
+    <top>
+        <AnchorPane prefHeight="80.0" styleClass="blue-theme" stylesheets="@new.css">
+           <children>
+               <Label styleClass="font-gray" stylesheets="@new.css" text="Sakura Nail Salon " AnchorPane.leftAnchor="10" AnchorPane.topAnchor="20">
+                   <effect>
+                       <Reflection bottomOpacity="0.2" fraction="0.5" topOffset="-5.0" />
+                   </effect>
+                   <font>
+                       <Font name="System Bold" size="26.0" />
+                   </font>
+               </Label>
+               <ImageView fitHeight="45" fitWidth="45" styleClass="default-theme" AnchorPane.rightAnchor="120" AnchorPane.topAnchor="15">
+                  <image>
+                      <Image url="@img/me.png" />
+                  </image>
+               </ImageView>
+               <Button styleClass="btn-radius-large,blue-theme" stylesheets="@new.css" text="Sign Out" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20" />
+           </children>
+        </AnchorPane>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.5">
+           <items>
+               <AnchorPane minWidth="156.0" prefHeight="822.0" prefWidth="429.0" styleClass="dark-gray-theme">
+                  <children>
+                      <Accordion AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <panes>
+                              <TitledPane alignment="TOP_LEFT" stylesheets="@new.css" text="Recent Appoinment">
+                                 <content>
+                                     <VBox minHeight="100" spacing="10" styleClass="dark-theme">
+                                        <children>
+                                            <Button styleClass="menu-btn" stylesheets="@new.css" text="Appoinment " />
+                                            <Button styleClass="menu-btn" text="Appoinment" />
+                                        </children>
+                                     </VBox>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane alignment="TOP_LEFT" stylesheets="@new.css" text="Walk-in service">
+                                 <content>
+                                     <VBox minHeight="100" spacing="10" styleClass="dark-theme">
+                                        <children>
+                                            <Button styleClass="menu-btn" text="Service" />
+                                            <Button styleClass="menu-btn" text="Service" />
+                                        </children>
+                                     </VBox>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane alignment="TOP_LEFT" stylesheets="@new.css" text="Client Information">
+                                 <content>
+                                     <VBox minHeight="130" spacing="10" styleClass="dark-theme">
+                                        <children>
+                                            <Button styleClass="menu-btn" text="Client" />
+                                            <Button styleClass="menu-btn" text="Membership" />
+                                            <Button styleClass="menu-btn" text="Other" />
+                                        </children>
+                                     </VBox>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane alignment="TOP_LEFT" stylesheets="@new.css" text="Inventory">
+                                 <content>
+                                     <VBox minHeight="130" spacing="10" styleClass="dark-theme">
+                                        <children>
+                                            <Button styleClass="menu-btn" text="Inventory" />
+                                            <Button styleClass="menu-btn" text="Inventory" />
+                                        </children>
+                                     </VBox>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane alignment="TOP_LEFT" stylesheets="@new.css" text="Employee">
+                                 <content>
+                                     <VBox minHeight="130" spacing="10" styleClass="dark-theme">
+                                        <children>
+                                            <Button styleClass="menu-btn" stylesheets="@new.css" text="Employee" />
+                                            <Button styleClass="menu-btn" text="Employee" />
+                                        </children>
+                                     </VBox>
+                                 </content>
+                              </TitledPane>
+                          </panes>
+                      </Accordion>
+                  </children>
+               </AnchorPane>
+   
+               <!--中间内容面板-->
+               <StackPane fx:id="mainContainer" minWidth="1060" prefHeight="822.0" prefWidth="1130.0" styleClass="default-theme" stylesheets="@new.css">
+                   <padding>
+                       <Insets bottom="5" left="30" right="10" top="10" />
+                   </padding>
+               <children>
+                  <AnchorPane prefHeight="835.0" prefWidth="1055.0" stylesheets="@new.css">
+                     <children>
+                        <Label fx:id="error_fname" layoutX="840.0" layoutY="110.0" />
+                        <Label fx:id="error_lname" layoutX="840.0" layoutY="184.0" />
+                        <Label fx:id="error_phone" layoutX="840.0" layoutY="250.0" />
+                        <Label fx:id="error_SSN" layoutX="840.0" layoutY="454.0" />
+                        <Label fx:id="error_address" layoutX="840.0" layoutY="523.0" />
+                        <Label layoutX="-6.0" text="Less Popular Employee" />
+                        <Label layoutX="495.0" text="Most Popular Employee" />
+                        <Label layoutX="-6.0" layoutY="198.0" text="Less Frequently Employees" />
+                        <Label layoutX="495.0" layoutY="198.0" text="Most Frequently Employees" />
+                        <TableView fx:id="PopEmpTableview" layoutX="-6.0" layoutY="36.0" prefHeight="126.0" prefWidth="490.0">
+                          <columns>
+                            <TableColumn fx:id="col1" prefWidth="88.0" text="Month#" />
+                            <TableColumn fx:id="col2" prefWidth="99.0" text="Employee" />
+                              <TableColumn fx:id="col3" prefWidth="82.0" text="App#" />
+                              <TableColumn fx:id="col4" prefWidth="82.0" text="Guest#" />
+                              <TableColumn fx:id="col5" prefWidth="138.0" text="Location" />
+                          </columns>
+                        </TableView>
+                        <TableView fx:id="FreEmpTableview" layoutX="-6.0" layoutY="250.0" prefHeight="299.0" prefWidth="490.0">
+                           <columns>
+                              <TableColumn fx:id="col11" prefWidth="72.0" text="Month" />
+                              <TableColumn fx:id="col12" prefWidth="141.0" text="Employee" />
+                              <TableColumn fx:id="col13" prefWidth="59.0" text="Days" />
+                              <TableColumn fx:id="col14" prefWidth="89.0" text="Shift WK" />
+                              <TableColumn fx:id="col15" prefWidth="128.0" text="Hours" />
+                           </columns>
+                        </TableView>
+                        <TableView fx:id="licenseTableView" layoutX="-6.0" layoutY="615.0" prefHeight="176.0" prefWidth="473.0">
+                          <columns>
+                            <TableColumn fx:id="col21" prefWidth="185.0" text="Employee" />
+                            <TableColumn fx:id="col22" prefWidth="287.0" text="License Expires" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="-6.0" layoutY="571.0" text="Expired Licenses" />
+                        <TableView fx:id="PopEmpTableview2" layoutX="495.0" layoutY="36.0" prefHeight="126.0" prefWidth="506.0">
+                           <columns>
+                              <TableColumn fx:id="col6" prefWidth="88.0" text="Month#" />
+                              <TableColumn fx:id="col7" prefWidth="111.0" text="Employee" />
+                              <TableColumn fx:id="col8" prefWidth="87.0" text="App#" />
+                              <TableColumn fx:id="col9" prefWidth="78.0" text="Guest#" />
+                              <TableColumn fx:id="col10" prefWidth="127.0" text="Location" />
+                           </columns>
+                        </TableView>
+                        <TableView fx:id="FreEmpTableview2" layoutX="495.0" layoutY="250.0" prefHeight="299.0" prefWidth="514.0">
+                           <columns>
+                              <TableColumn fx:id="col16" prefWidth="129.0" text="Week" />
+                              <TableColumn fx:id="col17" prefWidth="100.0" text="Employee" />
+                              <TableColumn fx:id="col18" prefWidth="59.0" text="Days" />
+                              <TableColumn fx:id="col19" prefWidth="90.0" text="Shift WK" />
+                              <TableColumn fx:id="col20" prefWidth="135.0" text="Hours" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </children>
+               </StackPane>
+           </items>
+            <padding>
+                <Insets top="10" />
+            </padding>
+        </SplitPane>
+    </center>
+</BorderPane>
